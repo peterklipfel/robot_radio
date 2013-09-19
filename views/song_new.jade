@@ -1,0 +1,13 @@
+extends layout
+block content
+  h1= title
+  form( method="post")
+    div
+      div
+        span Title :
+        input(type="text", name="title", id="editSongTitle")
+      div
+        span Body :
+        textarea(name="body", rows=20, id="editSongBody")
+      div#editSongSubmit
+        input(type="submit", value="Send")

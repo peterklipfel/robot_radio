@@ -30,7 +30,9 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/radio', routes.radio);
 app.get('/songs', song_routes.song_index)
-// app.get('/songs/new', song_routes.new_song)
+app.get('/songs/new', song_routes.get_new)
+app.post('/songs/new', song_routes.post_new)
+app.get('/songs/:id', song_routes.show_song)
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
