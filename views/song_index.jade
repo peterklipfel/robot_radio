@@ -1,0 +1,10 @@
+extends layout
+block content
+  h1= title
+  #songs
+    - each song in songs
+      div.song
+        div.created_at= song.created_at
+        div.title 
+          a(href="/songs/"+song._id)!= song.title
+        div.body= song.body

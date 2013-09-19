@@ -5,6 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
+var song_routes = require('./routes/song')
 var http = require('http');
 var path = require('path');
 
@@ -28,6 +29,8 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/radio', routes.radio);
+app.get('/songs', song_routes.song_index)
+// app.get('/songs/new', song_routes.new_song)
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
