@@ -1,13 +1,16 @@
 extends layout
 block content
   h1= title
-  form( method="post")
+  form( method="post", enctype="multipart/form-data")
     div
       div
         span Title :
         input(type="text", name="title", id="editSongTitle")
       div
-        span Body :
+        span Artist :
         textarea(name="body", rows=20, id="editSongBody")
+      div
+        span File :
+        input(type="file", name="song")
       div#editSongSubmit
-        input(type="submit", value="Send")
+        input(type="submit", value="Upload")

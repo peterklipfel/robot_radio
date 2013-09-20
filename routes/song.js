@@ -1,5 +1,8 @@
 var SongProvider = require('../songprovider-mongodb.js').SongProvider;
 var songProvider = new SongProvider('localhost', '27017');
+// var form = require('connect-form');
+var sys = require("sys")
+var util = require('util')
 
 exports.get_new = function(req, res){
   res.render('song_new.jade', { locals: {
@@ -9,12 +12,15 @@ exports.get_new = function(req, res){
 }
 
 exports.post_new = function (req, res) {
-  songProvider.save({
-    title: req.param('title'),
-    body: req.param('body')
-  }, function( error, docs) {
-    res.redirect('/')
-  });
+  // connect-form adds the req.form object
+  // we can (optionally) define onComplete, passing
+  // the exception (if any) fields parsed, and files parsed
+  sys.puts(util.inspect(req.files))
+  sys.puts('\nuploaded '+req.files.song.filename+' to' + './uploads/' + req.files.song.filename);
+  sys.puts(req.files.path)
+  res.redirect('back');
+  sys.puts("\n=> Done");
+
 }
 
 exports.show_song = function(req, res) {
@@ -34,3 +40,45 @@ exports.song_index = function(req, res){
     songs: docs})
   });
 };
+
+
+/*
+ * Create multipart parser to parse given request
+ */
+
+function parse_multipart(req) {
+    var parser = multipart.parser();
+
+    // Make parser use parsed request headers
+    parser.headers = req.headers;
+
+    // Add listeners to request, transfering data to parser
+
+    req.addListener("data", function(chunk) {
+        parser.write(chunk);
+    });
+
+    req.addListener("end", function() {
+        parser.close();
+    });
+
+    return parser;
+}
+
+/*
+ * Handle file upload
+ */
+function upload_file(req, res) {
+ var form = new formidable.IncomingForm();
+
+    form.parse(req, function(err, fields, files) {
+      res.writeHead(200, {'content-type': 'text/plain'});
+      res.write('received upload:\n\n');
+      res.end(util.inspect({fields: fields, files: files}));
+    });
+
+    sys.puts("\n=> Done");
+
+    return;
+}
+
