@@ -3,3 +3,13 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  audio#radioStream
+  script
+    window.addEventListener('load', onLoad, false);
+    function onLoad() {
+      console.log("loading")
+      var audio = document.getElementById('radioStream')
+      console.log(audio)
+      audio.src = 'http://localhost:3000/radio'
+      audio.play();
+    }
