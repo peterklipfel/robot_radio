@@ -10,10 +10,40 @@ block content
           a(href='/songs/new') Add Songs
   h1= title
   p Welcome to #{title}
+  .row
+    .col-md-2
+      input.slider.slider1(type='text', value='')
+      span Energy
+    .col-md-2
+      input.slider.slider2(type='text', value='')
+      span Dancability
+    .col-md-2
+      input.slider.slider3(type='text', value='')
+      span Acousticness
+    .col-md-2
+      input.slider.slider4(type='text', value='')
+      span Attr4
+    .col-md-2
+      input.slider.slider5(type='text', value='')
+      span Atrr 5
+    .col-md-2
+      input.slider.slider6(type='text', value='')
+      span Attr 6
   audio#radioStream
   script
     window.addEventListener('load', onLoad, false);
     function onLoad() {
+      for(var i=1; i<7; i++){
+        $('.slider'+i).slider({
+          max: 20,
+          min: 0,
+          step: 0.1,
+          value: 5,
+          tooltip: 'hide',
+          orientation: 'vertical',
+          selection: 'after'
+        })
+      }
       var audio = document.getElementById('radioStream')
       audio.src = 'http://localhost:3000/radio'
       audio.play();
