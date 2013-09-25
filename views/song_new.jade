@@ -1,5 +1,12 @@
 extends layout
 block content
+  nav.navbar.navbar-default.navbar-fixed-top#navbar(role='navigation')
+    .collapse.navbar-collapse.navbar-ex5-collapse
+      ul.nav.navbar-nav
+        li
+          a(href='/') Music
+        li.active
+          a(href='/songs/new') Add Songs
   h1= title
   form( method="post", enctype="multipart/form-data")
     div

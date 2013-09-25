@@ -6,3 +6,17 @@ body {
 a {
   color: #00B7FF;
 }
+
+#navbar{
+  border:none;
+  background-color: #3498db;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
+}
+
+#navbar .active > a{
+  background-color: #2980b9;
+  color: #ece0e1;
+}
