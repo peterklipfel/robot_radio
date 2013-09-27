@@ -8,27 +8,29 @@ block content
           a(href='/') Music
         li
           a(href='/songs/new') Add Songs
-  h1= title
-  p Welcome to #{title}
-  .row
-    .col-md-2
-      input.slider.slider1(type='text', value='')
-      span Energy
-    .col-md-2
-      input.slider.slider2(type='text', value='')
-      span Dancability
-    .col-md-2
-      input.slider.slider3(type='text', value='')
-      span Acousticness
-    .col-md-2
-      input.slider.slider4(type='text', value='')
-      span Attr4
-    .col-md-2
-      input.slider.slider5(type='text', value='')
-      span Atrr 5
-    .col-md-2
-      input.slider.slider6(type='text', value='')
-      span Attr 6
+  .container
+    .row
+      .col-md-2
+        input.slider.slider1(type='text', value='')
+        span Energy
+      .col-md-2
+        input.slider.slider2(type='text', value='')
+        span Dancability
+      .col-md-2
+        input.slider.slider3(type='text', value='')
+        span Acousticness
+      .col-md-2
+        input.slider.slider4(type='text', value='')
+        span Attr4
+      .col-md-2
+        input.slider.slider5(type='text', value='')
+        span Atrr 5
+      .col-md-2
+        input.slider.slider6(type='text', value='')
+        span Attr 6
+    .row
+      .col-md-12.text-center
+        button.btn.btn-success.btn-lg Next
   audio#radioStream
   script
     window.addEventListener('load', onLoad, false);

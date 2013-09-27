@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
 }
 
 a {
@@ -23,4 +24,18 @@ a {
 
 .slider{
   margin: 0 auto;
+}
+
+.btn-lg{
+  width: 10vw;
+  height: 10vh;
+  margin: 20px;
+}
+
+.container{
+  height: 100%;
+}
+
+.row{
+  margin-top: 30px;
 }
