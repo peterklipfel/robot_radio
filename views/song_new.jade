@@ -7,17 +7,19 @@ block content
           a(href='/') Music
         li.active
           a(href='/songs/new') Add Songs
-  h1= title
-  form( method="post", enctype="multipart/form-data")
-    div
-      div
-        span Title :
-        input(type="text", name="title", id="editSongTitle")
-      div
-        span Artist :
-        textarea(name="body", rows=20, id="editSongBody")
-      div
-        span File :
-        input(type="file", name="song")
-      div#editSongSubmit
-        input(type="submit", value="Upload")
+  .container
+    .jumbotron
+      form( method="post", enctype="multipart/form-data")
+        .row
+          .input-group.input-group-lg
+            span.input-group-addon Title
+            input.form-control.input-lg(type='text', placeholder='Rhythm n’ Beat', name="title", id="editSongTitle")
+        .row
+          .input-group.input-group-lg
+            span.input-group-addon Artist
+            input.form-control.input-lg(type='text', placeholder='Figrin D\'an and the Modal Nodes', name="title", id="editSongArtist")
+        .row
+            input(type="file", name="song")
+        .row
+          #editSongSubmit
+            input.btn.btn-success(type="submit", value="Upload")

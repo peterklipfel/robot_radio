@@ -30,6 +30,7 @@ a {
   width: 10vw;
   height: 10vh;
   margin: 20px;
+  min-width: 115px;
 }
 
 .container{
@@ -38,4 +39,18 @@ a {
 
 .row{
   margin-top: 30px;
+}
+
+.slider-label {
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.selected-key {
+  font-size: 18px;
+}
+
+.jumbotron{
+  background-color: #95a5a6;
+  margin-top: 15%;
 }
