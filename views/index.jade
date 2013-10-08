@@ -56,7 +56,7 @@ block content
         $(obj).css('margin-left', '-'+($(obj).width()/3).toString()+'px' )
       })
       var audio = document.getElementById('radioStream')
-      audio.src = 'http://localhost:3000/radio'
+      audio.src = 'http://localhost:3000/radio/6416-1e3cmpk'
       audio.play();
       $("#next_song").click(function() {
         console.log('clicked!')
@@ -64,7 +64,7 @@ block content
           'songs/pick', 
           {'Energy': $('#slider1').val()},
           function(data){
-            console.log(data)
+            console.log(data);
         });
       });
     }

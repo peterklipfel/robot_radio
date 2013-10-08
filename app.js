@@ -27,7 +27,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/radio', routes.radio);
+app.get('/radio/:file', routes.radio);
 app.post('/songs/new', song_routes.post_new)
 app.post('/songs/pick', song_routes.post_pick)
 app.get('/songs', song_routes.song_index)

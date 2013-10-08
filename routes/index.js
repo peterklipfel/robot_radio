@@ -13,7 +13,7 @@ exports.index = function(req, res){
 };
 
 exports.radio = function(req, res) {
-  var filePath = path.join(__dirname, '../uploads/6416-1e3cmpk.mp3');
+  var filePath = path.join(__dirname, '../uploads/'+req.params.file+'.mp3');
   var stat = fileSystem.statSync(filePath);
 
   res.writeHead(200, {
