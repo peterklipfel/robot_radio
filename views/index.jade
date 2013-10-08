@@ -12,27 +12,27 @@ block content
     .jumbotron
       .row
         .col-md-2
-          input.slider#slider1(type='text', value='')
+          input.slider#slider1(type='text', value='5')
           br
           span.slider-label Energy
         .col-md-2
-          input.slider#slider2(type='text', value='')
+          input.slider#slider2(type='text', value='5')
           br
           span.slider-label Danceability
         .col-md-2
-          input.slider#slider3(type='text', value='')
+          input.slider#slider3(type='text', value='5')
           br
           span.slider-label Acousticness
         .col-md-2
-          input.slider#slider4(type='text', value='')
+          input.slider#slider4(type='text', value='5')
           br
           span.slider-label Liveness
         .col-md-2
-          input.slider#slider5(type='text', value='')
+          input.slider#slider5(type='text', value='5')
           br
           span.slider-label Speechiness
         .col-md-2
-          input.slider#slider6(type='text', value='')
+          input.slider#slider6(type='text', value='5')
           span.slider-label Speed
       .row
         .col-md-12.text-center
@@ -62,7 +62,13 @@ block content
         console.log('clicked!')
         $.post(
           'songs/pick', 
-          {'Energy': $('#slider1').val()},
+          { 'energy': $('#slider1').val(),
+            'danceability': $('#slider2').val(),
+            'acousticness': $('#slider3').val(),
+            'liveness': $('#slider4').val(),
+            'speechiness': $('#slider5').val(),
+            'speed': $('#slider6').val()
+          },
           function(data){
             console.log(data);
             var audio = document.getElementById('radioStream')

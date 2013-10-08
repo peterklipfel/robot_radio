@@ -5,6 +5,12 @@ var sys = require("sys")
 var util = require('util')
 
 exports.post_pick = function (req, res) {
+  sys.puts(util.inspect(req.param('energy')))
+  sys.puts(util.inspect(req.param('danceability')))
+  sys.puts(util.inspect(req.param('acousticness')))
+  sys.puts(util.inspect(req.param('liveness')))
+  sys.puts(util.inspect(req.param('speechiness')))
+  sys.puts(util.inspect(req.param('speed')))
   res.send({'file': '6991-1tgvunm'})
 }
 
