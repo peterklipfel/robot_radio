@@ -12,37 +12,37 @@ block content
     .jumbotron
       .row
         .col-md-2
-          input.slider.slider1(type='text', value='')
+          input.slider#slider1(type='text', value='')
           br
           span.slider-label Energy
         .col-md-2
-          input.slider.slider2(type='text', value='')
+          input.slider#slider2(type='text', value='')
           br
-          span.slider-label Dancability
+          span.slider-label Danceability
         .col-md-2
-          input.slider.slider3(type='text', value='')
+          input.slider#slider3(type='text', value='')
           br
           span.slider-label Acousticness
         .col-md-2
-          input.slider.slider4(type='text', value='')
+          input.slider#slider4(type='text', value='')
           br
           span.slider-label Liveness
         .col-md-2
-          input.slider.slider5(type='text', value='')
+          input.slider#slider5(type='text', value='')
           br
           span.slider-label Speechiness
         .col-md-2
-          input.slider.slider6(type='text', value='')
+          input.slider#slider6(type='text', value='')
           span.slider-label Speed
       .row
         .col-md-12.text-center
-          button.btn.btn-success.btn-lg Next Song
+          button.btn.btn-success.btn-lg#next_song Next Song
   audio#radioStream
   script.
     window.addEventListener('load', onLoad, false);
     function onLoad() {
       for(var i=1; i<7; i++){
-        $('.slider'+i).slider({
+        $('#slider'+i).slider({
           max: 20,
           min: 0,
           step: 0.1,
@@ -58,4 +58,13 @@ block content
       var audio = document.getElementById('radioStream')
       audio.src = 'http://localhost:3000/radio'
       audio.play();
+      $("#next_song").click(function() {
+        console.log('clicked!')
+        $.post(
+          'songs/pick', 
+          {'Energy': $('#slider1').val()},
+          function(data){
+            console.log(data)
+        });
+      });
     }

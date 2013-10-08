@@ -4,6 +4,10 @@ var songProvider = new SongProvider('localhost', '27017');
 var sys = require("sys")
 var util = require('util')
 
+exports.post_pick = function (req, res) {
+  res.send({one: 'two'})
+}
+
 exports.get_new = function(req, res){
   res.render('song_new.jade', { locals: {
       title: 'Upload Song'

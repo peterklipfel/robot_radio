@@ -29,6 +29,7 @@ if ('development' == app.get('env')) {
 
 app.get('/radio', routes.radio);
 app.post('/songs/new', song_routes.post_new)
+app.post('/songs/pick', song_routes.post_pick)
 app.get('/songs', song_routes.song_index)
 app.get('/songs/new', song_routes.get_new)
 app.get('/songs/:id', song_routes.show_song)
