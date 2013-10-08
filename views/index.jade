@@ -65,6 +65,9 @@ block content
           {'Energy': $('#slider1').val()},
           function(data){
             console.log(data);
+            var audio = document.getElementById('radioStream')
+            audio.src = 'http://localhost:3000/radio/6991-1tgvunm';
+            audio.play();
         });
       });
     }
