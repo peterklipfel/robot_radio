@@ -5,7 +5,7 @@ var sys = require("sys")
 var util = require('util')
 
 exports.post_pick = function (req, res) {
-  res.send({one: 'two'})
+  res.send({'file': '6991-1tgvunm'})
 }
 
 exports.get_new = function(req, res){
