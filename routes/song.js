@@ -3,6 +3,13 @@ var songProvider = new SongProvider('localhost', '27017');
 // var form = require('connect-form');
 var sys = require("sys")
 var util = require('util')
+var echojs = require('echojs')
+  , fs = require('fs')
+  , path = require('path');
+
+var echo = echojs({
+  key: process.env.ECHONEST_KEY
+});
 
 exports.post_pick = function (req, res) {
   sys.puts(util.inspect(req.param('energy')))
@@ -25,6 +32,14 @@ exports.post_new = function (req, res) {
   // connect-form adds the req.form object
   // we can (optionally) define onComplete, passing
   // the exception (if any) fields parsed, and files parsed
+  var location = req.files.song.path;
+  fs.readFile(location, function (err, buffer) {
+    echo('track/upload').post({
+      filetype: path.extname(location).substr(1)
+    }, 'application/octet-stream', buffer, function (err, json) {
+      sys.puts(util.inspect(json));
+    });
+  });
   songProvider.save({
     title: req.param('title'),
     body: req.param('body'),
@@ -92,5 +107,12 @@ function upload_file(req, res) {
   });
   sys.puts("\n=> Done");
   return;
+}
+
+function getEchonestInfo (path) {
+  var request = new XMLHttpRequest();
+  var track = new Object();
+  track.buffer = null;
+  
 }
 
