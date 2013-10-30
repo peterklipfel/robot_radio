@@ -40,31 +40,28 @@ exports.post_new = function (req, res) {
       bucket: "audio_summary"
     }, 'application/octet-stream', buffer, function (err, json) {
       sys.puts(util.inspect(err)) // == 0 on success?
-
-      sys.puts(util.inspect(json.response.track));
-      if(containsAllFields(json.response.track)){
-        sys.puts("found all fields!");
+      sys.puts(util.inspect(json))
+      if(err == 0){
         sys.puts(util.inspect(json.response.track));
-      } else {
-        sys.puts("did not find all fields!");
-        echo('track/profile').get({
-          id: json.response.track.id,
-          bucket: "audio_summary"
-        }, function (err, json2) {
-          sys.puts(util.inspect(json2.response.track));
-        });
+        if(containsAllFields(json.response.track)){
+          sys.puts("found all fields!");
+          sys.puts(util.inspect(json.response.track));
+          saveSong(req, json)
+        } else {
+          sys.puts("did not find all fields!");
+          echo('track/profile').get({
+            id: json.response.track.id,
+            bucket: "audio_summary"
+          }, function (err, json2) {
+            sys.puts(util.inspect(json2.response.track));
+            if(containsAllFields(json2.response.track)){
+              saveSong(req, json2)
+            } else {
+              sys.puts("There was an error fetching the data")
+            }
+          });
+        }
       }
-      // songProvider.save({
-      //   title: req.param('title'),
-      //   body: req.param('body'),
-      //   path: req.files.song.path,
-      //   echoNestId: json.response.track.id,
-      //   audio_summary: json.response.track.audio_summary
-      // }, function( error, docs) {
-      //   sys.puts(util.inspect(req.files))
-      //   sys.puts(req.files.song.path)
-      //   sys.puts("\n=> Done");
-      // });
     });
   });
   res.redirect('/')
@@ -141,5 +138,19 @@ function containsAllFields (track) {
     }
   }
   return true
+}
+
+function saveSong(req, json){
+  songProvider.save({
+    title: req.param('title'),
+    body: req.param('body'),
+    path: req.files.song.path,
+    echoNestId: json.response.track.id,
+    audio_summary: json.response.track.audio_summary
+  }, function( error, docs) {
+    sys.puts(util.inspect(req.files))
+    sys.puts(req.files.song.path)
+    sys.puts("\n=> Done");
+  });
 }
 
