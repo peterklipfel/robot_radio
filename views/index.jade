@@ -41,6 +41,9 @@ block content
   audio#radioStream
   script.
     window.addEventListener('load', onLoad, false);
+    function getRandomInt (min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
     function onLoad() {
       for(var i=1; i<7; i++){
         $('#slider'+i).slider({
@@ -57,8 +60,21 @@ block content
         $(obj).css('margin-left', '-'+($(obj).width()/3).toString()+'px' )
       })
       var audio = document.getElementById('radioStream')
-      audio.src = 'http://localhost:3000/radio/6416-1e3cmpk'
-      audio.play();
+      $.post(
+        'songs/pick', 
+        { 'energy': getRandomInt(0, 20),
+          'danceability': getRandomInt(0, 20),
+          'acousticness': getRandomInt(0, 20),
+          'liveness': getRandomInt(0, 20),
+          'speechiness': getRandomInt(0, 20),
+          'speed': getRandomInt(0, 20)
+        },
+        function(data){
+          console.log(data);
+          var audio = document.getElementById('radioStream')
+          audio.src = 'http://localhost:3000/radio/'+data.file;
+          audio.play();
+      });
       $("#next_song").click(function() {
         console.log('clicked!')
         $.post(
