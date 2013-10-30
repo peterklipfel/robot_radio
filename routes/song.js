@@ -33,23 +33,41 @@ exports.post_new = function (req, res) {
   // we can (optionally) define onComplete, passing
   // the exception (if any) fields parsed, and files parsed
   var location = req.files.song.path;
+  sys.puts(util.inspect(location));
   fs.readFile(location, function (err, buffer) {
     echo('track/upload').post({
-      filetype: path.extname(location).substr(1)
+      filetype: path.extname(location).substr(1),
+      bucket: "audio_summary"
     }, 'application/octet-stream', buffer, function (err, json) {
-      sys.puts(util.inspect(json));
+      sys.puts(util.inspect(err)) // == 0 on success?
+
+      sys.puts(util.inspect(json.response.track));
+      if(containsAllFields(json.response.track)){
+        sys.puts("found all fields!");
+        sys.puts(util.inspect(json.response.track));
+      } else {
+        sys.puts("did not find all fields!");
+        echo('track/profile').get({
+          id: json.response.track.id,
+          bucket: "audio_summary"
+        }, function (err, json2) {
+          sys.puts(util.inspect(json2.response.track));
+        });
+      }
+      // songProvider.save({
+      //   title: req.param('title'),
+      //   body: req.param('body'),
+      //   path: req.files.song.path,
+      //   echoNestId: json.response.track.id,
+      //   audio_summary: json.response.track.audio_summary
+      // }, function( error, docs) {
+      //   sys.puts(util.inspect(req.files))
+      //   sys.puts(req.files.song.path)
+      //   sys.puts("\n=> Done");
+      // });
     });
   });
-  songProvider.save({
-    title: req.param('title'),
-    body: req.param('body'),
-    path: req.files.song.path
-  }, function( error, docs) {
-    sys.puts(util.inspect(req.files))
-    sys.puts(req.files.song.path)
-    sys.puts("\n=> Done");
-    res.redirect('/')
-  });
+  res.redirect('/')
 }
 
 exports.show_song = function(req, res) {
@@ -114,5 +132,14 @@ function getEchonestInfo (path) {
   var track = new Object();
   track.buffer = null;
   
+}
+
+function containsAllFields (track) {
+  for(attr in track.audio_summary){
+    if(track.audio_summary[attr] == null){
+      return false;
+    }
+  }
+  return true
 }
 
