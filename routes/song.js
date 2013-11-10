@@ -6,12 +6,14 @@ var util = require('util')
 var echojs = require('echojs')
   , fs = require('fs')
   , path = require('path');
+var vector = require('../lib/vectorMath.js')
 
 var echo = echojs({
   key: process.env.ECHONEST_KEY
 });
 
 exports.post_pick = function (req, res) {
+  build 
   sys.puts(util.inspect(req.param('energy')))
   sys.puts(util.inspect(req.param('danceability')))
   sys.puts(util.inspect(req.param('acousticness')))

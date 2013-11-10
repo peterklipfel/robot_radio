@@ -10,6 +10,7 @@
     "jade": "*",
     "mongodb": "*",
     "echojs": "*",
-    "formidable": "latest"
+    "formidable": "latest", 
+    "mocha": "*"
   }
 }
