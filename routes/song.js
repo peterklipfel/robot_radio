@@ -6,21 +6,30 @@ var util = require('util')
 var echojs = require('echojs')
   , fs = require('fs')
   , path = require('path');
-var vector = require('../lib/vectorMath.js')
+var vectorMath = require('../lib/vectorMath.js')
 
 var echo = echojs({
   key: process.env.ECHONEST_KEY
 });
 
 exports.post_pick = function (req, res) {
-  build 
-  sys.puts(util.inspect(req.param('energy')))
-  sys.puts(util.inspect(req.param('danceability')))
-  sys.puts(util.inspect(req.param('acousticness')))
-  sys.puts(util.inspect(req.param('liveness')))
-  sys.puts(util.inspect(req.param('speechiness')))
-  sys.puts(util.inspect(req.param('speed')))
-  res.send({'file': '6991-1tgvunm'})
+  var title = ""
+  songProvider.findAll( function(err, data){
+    var least_difference = -1,
+        reqVector = getVector(req.body);
+    for(i in data){
+      var song = data[i],
+          dbVector = getVector(song.audio_summary)
+      if(vectorMath.similarity(reqVector, dbVector) > least_difference){
+        title = song.path
+      }
+      // console.log(song)
+    }
+    sys.puts(util.inspect(req.body))
+    var patt = new RegExp(/\/(\d+\-\w+)/);
+    console.log(patt.exec(title)[1])
+    res.send({'file': patt.exec(title)[1]})
+  })
 }
 
 exports.get_new = function(req, res){
@@ -154,5 +163,10 @@ function saveSong(req, json){
     sys.puts(req.files.song.path)
     sys.puts("\n=> Done");
   });
+}
+
+function getVector(obj){
+  return [obj.energy, obj.danceability, obj.acousticness, obj.liveness, 
+          obj.speechiness, obj.tempo]
 }
 

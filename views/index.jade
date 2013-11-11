@@ -67,7 +67,7 @@ block content
           'acousticness': getRandomInt(0, 20),
           'liveness': getRandomInt(0, 20),
           'speechiness': getRandomInt(0, 20),
-          'speed': getRandomInt(0, 20)
+          'tempo': getRandomInt(0, 20)
         },
         function(data){
           console.log(data);
@@ -84,7 +84,7 @@ block content
             'acousticness': $('#slider3').val(),
             'liveness': $('#slider4').val(),
             'speechiness': $('#slider5').val(),
-            'speed': $('#slider6').val()
+            'tempo': $('#slider6').val()
           },
           function(data){
             console.log(data);
