@@ -26,9 +26,14 @@ exports.post_pick = function (req, res) {
       // console.log(song)
     }
     sys.puts(util.inspect(req.body))
-    var patt = new RegExp(/\/(\d+\-\w+)/);
-    console.log(patt.exec(title)[1])
-    res.send({'file': patt.exec(title)[1]})
+    if (title.length>0) {
+      var patt = new RegExp(/\/(\d+\-\w+)/);
+      console.log(title)
+      console.log(patt.exec(title)[1])
+      res.send({'file': patt.exec(title)[1]})
+    } else {
+      res.send({"error": "Could not find a close enough song"})
+    }
   })
 }
 
@@ -167,6 +172,6 @@ function saveSong(req, json){
 
 function getVector(obj){
   return [obj.energy, obj.danceability, obj.acousticness, obj.liveness, 
-          obj.speechiness, obj.tempo]
+          obj.speechiness, obj.valence]
 }
 

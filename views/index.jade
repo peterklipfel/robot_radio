@@ -34,23 +34,20 @@ block content
         .col-md-2
           input.slider#slider6(type='text', value='5')
           br
-          span.slider-label Speed
+          span.slider-label Mood
       .row
         .col-md-12.text-center
           button.btn.btn-success.btn-lg#next_song Next Song
   audio#radioStream
   script.
     window.addEventListener('load', onLoad, false);
-    function getRandomInt (min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
     function onLoad() {
       for(var i=1; i<7; i++){
         $('#slider'+i).slider({
-          max: 20,
+          max: 1,
           min: 0,
-          step: 0.1,
-          value: 5,
+          step: 0.001,
+          value: 0.5,
           tooltip: 'hide',
           orientation: 'vertical',
           selection: 'after'
@@ -62,12 +59,12 @@ block content
       var audio = document.getElementById('radioStream')
       $.post(
         'songs/pick', 
-        { 'energy': getRandomInt(0, 20),
-          'danceability': getRandomInt(0, 20),
-          'acousticness': getRandomInt(0, 20),
-          'liveness': getRandomInt(0, 20),
-          'speechiness': getRandomInt(0, 20),
-          'tempo': getRandomInt(0, 20)
+        { 'energy': Math.random(),
+          'danceability': Math.random(),
+          'acousticness': Math.random(),
+          'liveness': Math.random(),
+          'speechiness': Math.random(),
+          'valence': Math.random()
         },
         function(data){
           console.log(data);
@@ -84,7 +81,7 @@ block content
             'acousticness': $('#slider3').val(),
             'liveness': $('#slider4').val(),
             'speechiness': $('#slider5').val(),
-            'tempo': $('#slider6').val()
+            'valence': $('#slider6').val()
           },
           function(data){
             console.log(data);
