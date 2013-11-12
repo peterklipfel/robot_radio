@@ -19,9 +19,11 @@ describe('vectorMath', function(){
 
   describe("#similarity", function(){
     it("should calculate correct magnitude", function(){
-      assert.equal(-1, vectorMath.similarity([-1, -1, -1, -1], [1, 1, 1, 1]))
       assert.equal(0, vectorMath.similarity([0, 10, 0], [10, 0, 10]))
-      assert.equal(1, vectorMath.similarity([1, 1, 1, 1], [1, 1, 1, 1]))
+      assert.equal(true, 
+        vectorMath.similarity([1, 1, 1, 1], [1, 1, 1, 1]) >
+        vectorMath.similarity([1, 1, 1, 2], [1, 1, 1, 1])
+        )
     })
   })
 

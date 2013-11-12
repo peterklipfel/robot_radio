@@ -67,7 +67,6 @@ block content
           'valence': Math.random()
         },
         function(data){
-          console.log(data);
           var audio = document.getElementById('radioStream')
           audio.src = 'http://localhost:3000/radio/'+data.file;
           audio.play();
