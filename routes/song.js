@@ -154,7 +154,7 @@ function saveSong(req, json){
     title: req.param('title'),
     body: req.param('body'),
     path: req.files.song.path,
-    track: json.response.track,
+    track: json.response.track
   }, function( error, docs) {
     console.log(util.inspect(req.files))
     console.log(req.files.song.path)

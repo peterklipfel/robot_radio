@@ -54,3 +54,25 @@ a {
   background-color: #95a5a6;
   margin-top: 15%;
 }
+
+.panel-default {
+  border: none;
+}
+.panel-default > .panel-heading{
+  border: none;
+  background-color: #95a5a6;
+}
+.panel-title {
+  color: #ece0e1;
+}
+a:hover{
+  text-decoration: none;
+}
+.panel-title:hover{
+  color: #000;
+  text-decoration: none;
+  -webkit-transition:color 0.25s ease-in;  
+  -moz-transition:color 0.25s ease-in;  
+  -o-transition:color 0.25s ease-in;  
+  transition:color 0.25s ease-in;
+}
