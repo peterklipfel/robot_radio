@@ -16,22 +16,23 @@ var echo = echojs({
 exports.post_pick = function (req, res) {
   var title = ""
   songProvider.findAll( function(err, data){
-    var least_difference = -1,
+    var least_difference = 10,
         reqVector = getVector(req.body);
     for(i in data){
       var song = data[i],
-          dbVector = getVector(song.audio_summary)
-      console.log(song.title)
-      if(vectorMath.similarity(reqVector, dbVector) > least_difference){
+          dbVector = getVector(song.track.audio_summary)
+      console.log(song.track.title + " by " + song.track.artist)
+      var distance = vectorMath.distanceBetween(reqVector, dbVector)
+      if(distance < least_difference){
         title = song.path
+        least_difference = distance
+        console.log("Picked " + song.track.title + " by " + song.track.artist)
       }
-      // console.log(song)
     }
-    console.log(util.inspect(req.body))
+    // console.log(util.inspect(req.body))
     if (title.length>0) {
       var patt = new RegExp(/\/(\d+\-\w+)/);
       console.log(title)
-      console.log(patt.exec(title)[1])
       res.send({'file': patt.exec(title)[1]})
     } else {
       res.send({"error": "Could not find a close enough song"})
