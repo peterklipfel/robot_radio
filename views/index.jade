@@ -37,6 +37,7 @@ block content
           span.slider-label Mood
       .row
         .col-md-12.text-center
+          button.btn.btn-primary.btn-lg#random_song Random Song
           button.btn.btn-success.btn-lg#next_song Next Song
   audio#radioStream
   script.
@@ -53,19 +54,20 @@ block content
           selection: 'after'
         })
       }
+      function genRandomSliderVals(){
+        var randomVals = {'energy':0.5, 'danceability':0.5, 'acousticness':0.5, 'liveness':0.5, 'speechiness':0.5,'valence':0.5}
+        for(i in randomVals){
+          randomVals[i] = Math.random()
+        }
+        return randomVals
+      }
       $.each($('.slider-label'), function(i, obj){
         $(obj).css('margin-left', '-'+($(obj).width()/3).toString()+'px' )
       })
       var audio = document.getElementById('radioStream')
       $.post(
-        'songs/pick', 
-        { 'energy': Math.random(),
-          'danceability': Math.random(),
-          'acousticness': Math.random(),
-          'liveness': Math.random(),
-          'speechiness': Math.random(),
-          'valence': Math.random()
-        },
+        'songs/pick',
+        genRandomSliderVals(),
         function(data){
           var audio = document.getElementById('radioStream')
           audio.src = 'http://localhost:3000/radio/'+data.file;
@@ -82,6 +84,18 @@ block content
             'speechiness': $('#slider5').val(),
             'valence': $('#slider6').val()
           },
+          function(data){
+            console.log(data);
+            var audio = document.getElementById('radioStream')
+            audio.src = 'http://localhost:3000/radio/'+data.file;
+            audio.play();
+        });
+      });
+      $("#random_song").click(function() {
+        console.log('clicked!')
+        $.post(
+          'songs/pick', 
+          genRandomSliderVals(),
           function(data){
             console.log(data);
             var audio = document.getElementById('radioStream')
