@@ -43,23 +43,36 @@ block content
   script.
     window.addEventListener('load', onLoad, false);
     function onLoad() {
+      var pageSliders = []
       for(var i=1; i<7; i++){
-        $('#slider'+i).slider({
+         pageSliders.push($('#slider'+i).slider({
           max: 1,
           min: 0,
           step: 0.001,
-          value: 0.5,
+          value: Math.random(),
           tooltip: 'hide',
           orientation: 'vertical',
           selection: 'after'
-        })
+        }))
       }
+      pageSliders[0].slider('setValue', 0.5)
       function genRandomSliderVals(){
         var randomVals = {'energy':0.5, 'danceability':0.5, 'acousticness':0.5, 'liveness':0.5, 'speechiness':0.5,'valence':0.5}
+        var j = 0;
         for(i in randomVals){
           randomVals[i] = Math.random()
+          pageSliders[j].slider('setValue', randomVals[i])
+          j += 1
         }
         return randomVals
+      }
+      function getSliderVals(){
+        return { 'energy': $('#slider1').val(),
+            'danceability': $('#slider2').val(),
+            'acousticness': $('#slider3').val(),
+            'liveness': $('#slider4').val(),
+            'speechiness': $('#slider5').val(),
+            'valence': $('#slider6').val() }
       }
       $.each($('.slider-label'), function(i, obj){
         $(obj).css('margin-left', '-'+($(obj).width()/3).toString()+'px' )
@@ -70,36 +83,26 @@ block content
         genRandomSliderVals(),
         function(data){
           var audio = document.getElementById('radioStream')
-          audio.src = 'http://localhost:3000/radio/'+data.file;
+          audio.src = document.location.host+'/radio/'+data.file;
           audio.play();
       });
       $("#next_song").click(function() {
-        console.log('clicked!')
         $.post(
           'songs/pick', 
-          { 'energy': $('#slider1').val(),
-            'danceability': $('#slider2').val(),
-            'acousticness': $('#slider3').val(),
-            'liveness': $('#slider4').val(),
-            'speechiness': $('#slider5').val(),
-            'valence': $('#slider6').val()
-          },
+          getSliderVals(),
           function(data){
-            console.log(data);
             var audio = document.getElementById('radioStream')
-            audio.src = 'http://localhost:3000/radio/'+data.file;
+            audio.src = document.location.host+'/radio/'+data.file;
             audio.play();
         });
       });
       $("#random_song").click(function() {
-        console.log('clicked!')
         $.post(
           'songs/pick', 
           genRandomSliderVals(),
           function(data){
-            console.log(data);
             var audio = document.getElementById('radioStream')
-            audio.src = 'http://localhost:3000/radio/'+data.file;
+            audio.src = document.location.host+'/radio/'+data.file;
             audio.play();
         });
       });
