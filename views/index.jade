@@ -83,7 +83,7 @@ block content
         genRandomSliderVals(),
         function(data){
           var audio = document.getElementById('radioStream')
-          audio.src = document.location.host+'/radio/'+data.file;
+          audio.src = '/radio/'+data.file;
           audio.play();
       });
       $("#next_song").click(function() {
@@ -92,7 +92,7 @@ block content
           getSliderVals(),
           function(data){
             var audio = document.getElementById('radioStream')
-            audio.src = document.location.host+'/radio/'+data.file;
+            audio.src = '/radio/'+data.file;
             audio.play();
         });
       });
@@ -102,7 +102,7 @@ block content
           genRandomSliderVals(),
           function(data){
             var audio = document.getElementById('radioStream')
-            audio.src = document.location.host+'/radio/'+data.file;
+            audio.src = '/radio/'+data.file;
             audio.play();
         });
       });
