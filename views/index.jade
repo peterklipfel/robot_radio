@@ -67,12 +67,12 @@ block content
         return randomVals
       }
       function getSliderVals(){
-        return { 'energy': $('#slider1').val(),
-            'danceability': $('#slider2').val(),
-            'acousticness': $('#slider3').val(),
-            'liveness': $('#slider4').val(),
-            'speechiness': $('#slider5').val(),
-            'valence': $('#slider6').val() }
+        return { 'energy': 1 - $('#slider1').val(),
+            'danceability': 1 - $('#slider2').val(),
+            'acousticness': 1 - $('#slider3').val(),
+            'liveness': 1 - $('#slider4').val(),
+            'speechiness': 1 - $('#slider5').val(),
+            'valence': 1 - $('#slider6').val() }
       }
       $.each($('.slider-label'), function(i, obj){
         $(obj).css('margin-left', '-'+($(obj).width()/3).toString()+'px' )
