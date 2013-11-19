@@ -15,12 +15,13 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
-app.use(express.favicon());
+app.use(express.favicon(__dirname+'/public/images/favicon.ico', { maxAge: 1000 }));
 app.use(express.logger('dev'));
 app.use(express.bodyParser({ keepExtensions: true, uploadDir: './uploads' }));
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.favicon("public/images/favicon.ico"));
 
 // development only
 if ('development' == app.get('env')) {
