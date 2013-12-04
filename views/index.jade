@@ -17,27 +17,27 @@ block content
       #sliderWrap
         span#infoLink Information
         .row
-          .col-md-2
+          .col-md-2.text-center
             input.slider#slider1(type='text')
             br
             span.slider-label Energy
-          .col-md-2
+          .col-md-2.text-center
             input.slider#slider2(type='text')
             br
             span.slider-label Danceability
-          .col-md-2
+          .col-md-2.text-center
             input.slider#slider3(type='text')
             br
             span.slider-label Acousticness
-          .col-md-2
+          .col-md-2.text-center
             input.slider#slider4(type='text')
             br
             span.slider-label Liveness
-          .col-md-2
+          .col-md-2.text-center
             input.slider#slider5(type='text')
             br
             span.slider-label Speechiness
-          .col-md-2
+          .col-md-2.text-center
             input.slider#slider6(type='text')
             br
             span.slider-label Mood
@@ -104,9 +104,6 @@ block content
             'speechiness': 1 - $('#slider5').val(),
             'valence': 1 - $('#slider6').val() }
       }
-      $.each($('.slider-label'), function(i, obj){
-        $(obj).css('margin-left', '-'+($(obj).width()/3).toString()+'px' )
-      })
       var audio = document.getElementById('radioStream')
       $.post(
         'songs/pick',
