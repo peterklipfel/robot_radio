@@ -44,15 +44,15 @@ block content
         .row
           .col-md-12.text-center
             .btn-group
-              button.btn.btn-primary
+              button.btn.btn-primary.presetSelect#happy
                 | Happy
-              button.btn.btn-primary
+              button.btn.btn-primary.presetSelect#angry
                 | Angry
-              button.btn.btn-primary
+              button.btn.btn-primary.presetSelect#talk
                 | Talk
-              button.btn.btn-primary
+              button.btn.btn-primary.presetSelect#dance
                 | Dance
-              button.btn.btn-primary
+              button.btn.btn-primary.presetSelect#chill
                 | Chill
         .row
           .col-md-12.text-center
@@ -88,6 +88,13 @@ block content
           j += 1
         }
         return randomVals
+      }
+      function setSliderVals(vals){
+        var j = 0;
+        for(i in vals){
+          pageSliders[j].slider('setValue', vals[i])
+          j += 1
+        }
       }
       function getSliderVals(){
         return { 'energy': 1 - $('#slider1').val(),
@@ -140,5 +147,47 @@ block content
           $('#sliderWrap').fadeIn(500);
         });
       });
-
+      // Set buttons
+      // unfortunately, because of the vertical hack, I have to do 1-valIWant
+      $('#happy').click(function(){
+        setSliderVals({
+          'energy':0.2,
+          'danceability':0.45,
+          'acousticness':0.9,
+          'liveness':0.6,
+          'speechiness':0.5,
+          'valence':0.1})
+      });
+      $('#angry').click(function(){
+        setSliderVals({'energy':0.2, 
+          'danceability':0.35, 
+          'acousticness':0.4, 
+          'liveness':0.8, 
+          'speechiness':0.4,
+          'valence':0.85})
+      });
+      $('#talk').click(function(){
+        setSliderVals({'energy':0.95,
+          'danceability':0.95,
+          'acousticness':0.1,
+          'liveness':0.2,
+          'speechiness':0.01,
+          'valence':0.7})
+      });
+      $('#dance').click(function(){
+        setSliderVals({'energy':0.1,
+          'danceability':0.05,
+          'acousticness':0.1,
+          'liveness':0.8,
+          'speechiness':0.65,
+          'valence':0.1})
+      });
+      $('#chill').click(function(){
+        setSliderVals({'energy':0.8,
+          'danceability':0.75,
+          'acousticness':0.5,
+          'liveness':0.6,
+          'speechiness':0.4,
+          'valence':0.7})
+      });
     }
