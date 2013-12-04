@@ -76,3 +76,12 @@ a:hover{
   -o-transition:color 0.25s ease-in;  
   transition:color 0.25s ease-in;
 }
+
+#infoLink, #sliderLink{
+  position: relative;
+  float: right;
+  display: block;
+  margin: -80px -50px;
+  color: #fff;
+  cursor: pointer;
+}

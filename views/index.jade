@@ -14,35 +14,54 @@ block content
            strong Peter Klipfel
   .container
     .jumbotron
-      .row
-        .col-md-2
-          input.slider#slider1(type='text')
-          br
-          span.slider-label Energy
-        .col-md-2
-          input.slider#slider2(type='text')
-          br
-          span.slider-label Danceability
-        .col-md-2
-          input.slider#slider3(type='text')
-          br
-          span.slider-label Acousticness
-        .col-md-2
-          input.slider#slider4(type='text')
-          br
-          span.slider-label Liveness
-        .col-md-2
-          input.slider#slider5(type='text')
-          br
-          span.slider-label Speechiness
-        .col-md-2
-          input.slider#slider6(type='text')
-          br
-          span.slider-label Mood
-      .row
-        .col-md-12.text-center
-          button.btn.btn-primary.btn-lg#random_song Random Song
-          button.btn.btn-success.btn-lg#next_song Next Song
+      #sliderWrap
+        span#infoLink Information
+        .row
+          .col-md-2
+            input.slider#slider1(type='text')
+            br
+            span.slider-label Energy
+          .col-md-2
+            input.slider#slider2(type='text')
+            br
+            span.slider-label Danceability
+          .col-md-2
+            input.slider#slider3(type='text')
+            br
+            span.slider-label Acousticness
+          .col-md-2
+            input.slider#slider4(type='text')
+            br
+            span.slider-label Liveness
+          .col-md-2
+            input.slider#slider5(type='text')
+            br
+            span.slider-label Speechiness
+          .col-md-2
+            input.slider#slider6(type='text')
+            br
+            span.slider-label Mood
+        .row
+          .col-md-12.text-center
+            .btn-group
+              button.btn.btn-primary
+                | Happy
+              button.btn.btn-primary
+                | Angry
+              button.btn.btn-primary
+                | Talk
+              button.btn.btn-primary
+                | Dance
+              button.btn.btn-primary
+                | Chill
+        .row
+          .col-md-12.text-center
+            button.btn.btn-primary.btn-lg#random_song Random Song
+            button.btn.btn-success.btn-lg#next_song Next Song
+      #infoWrap
+        span#sliderLink Sliders
+        .row
+          .col-md-12 This is an explanation of what I do.
   audio#radioStream
   script.
     window.addEventListener('load', onLoad, false);
@@ -110,4 +129,16 @@ block content
             audio.play();
         });
       });
+      $('#infoWrap').hide();
+      $('#infoLink').click(function(){
+        $('#sliderWrap').fadeOut(500, function(){
+          $('#infoWrap').fadeIn(500);
+        });
+      });
+      $('#sliderLink').click(function(){
+        $('#infoWrap').fadeOut(500, function(){
+          $('#sliderWrap').fadeIn(500);
+        });
+      });
+
     }
