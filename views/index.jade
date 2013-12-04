@@ -54,10 +54,11 @@ block content
                 | Dance
               button.btn.btn-primary.presetSelect#chill
                 | Chill
+              button.btn.btn-primary.presetSelect#random_song
+                | Random
         .row
           .col-md-12.text-center
-            button.btn.btn-primary.btn-lg#random_song Random Song
-            button.btn.btn-success.btn-lg#next_song Next Song
+            button.btn.btn-success.btn-lg#next_song Find Song
       #infoWrap
         span#sliderLink Sliders
         .row
@@ -123,16 +124,6 @@ block content
             audio.play();
         });
       });
-      $("#random_song").click(function() {
-        $.post(
-          'songs/pick', 
-          genRandomSliderVals(),
-          function(data){
-            var audio = document.getElementById('radioStream')
-            audio.src = '/radio/'+data.file;
-            audio.play();
-        });
-      });
       $('#infoWrap').hide();
       $('#infoLink').click(function(){
         $('#sliderWrap').fadeOut(500, function(){
@@ -187,4 +178,7 @@ block content
           'speechiness':0.4,
           'valence':0.7})
       });
+      $('#random_song').click(function(){
+        genRandomSliderVals();
+      })
     }
