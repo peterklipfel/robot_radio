@@ -11,9 +11,12 @@ block content
     .jumbotron
       form( method="post", enctype="multipart/form-data")
         #accordion.panel-group
-        .row
-          input(type="file", name="song")
-        .row
+        .row.text-center
+          .form-group
+            .btn.btn-primary.pickSongGroup
+              //- .pickSongText Choose Track
+              input.pickSong(type="file", name="song") Upload
+        .row.text-center
           .panel.panel-default
             .panel-heading
               a(data-toggle='collapse', data-parent='#accordion', href='#collapseOne')
@@ -30,5 +33,9 @@ block content
                       span.input-group-addon Artist
                       input.form-control.input-lg(type='text', placeholder='Figrin D\'an and the Modal Nodes', name="title", id="editSongArtist")
         .row
-          #editSongSubmit
-            input.btn.btn-success(type="submit", value="Upload")
+          .col-md-12.text-center
+            #editSongSubmit
+              input.btn.btn-success.btn-lg(type="submit", value="Upload")
+        .row
+          .col-md-12.text-center
+            p Only upload music that you are legally allowed to

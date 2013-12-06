@@ -85,3 +85,10 @@ a:hover{
   color: #fff;
   cursor: pointer;
 }
+
+.pickSongText{
+  position: absolute;
+}
+.pickSongGroup{
+  text-align: center
+}
