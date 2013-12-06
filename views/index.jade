@@ -62,7 +62,14 @@ block content
       #infoWrap
         span#sliderLink Sliders
         .row
-          .col-md-12 This is an explanation of what I do.
+          .col-md-12 This application allows you to find songs based on different qualitites of music.
+            |It uses the echonest api to acquire information about music, and then finds the closest 
+            |musical match to your selection.  The sliders represent different attributes of a song
+            |Acousticness measures how acoustic a song is, Speechiness will be higher for rap than 
+            |instrumental music, Energy measures how much you want to get up and move to a song (moshing
+            |or doing the charleston), Danceability represents how reasonably you can dance to a song
+            |(a gong hit rates lower than a Tiesto track), Mood is high for good feeling songs
+            |and low for negative feeling songs.
   audio#radioStream
   script.
     window.addEventListener('load', onLoad, false);
