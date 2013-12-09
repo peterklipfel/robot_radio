@@ -105,12 +105,12 @@ block content
         }
       }
       function getSliderVals(){
-        return { 'energy': 1 - $('#slider1').val(),
-            'danceability': 1 - $('#slider2').val(),
-            'acousticness': 1 - $('#slider3').val(),
-            'liveness': 1 - $('#slider4').val(),
-            'speechiness': 1 - $('#slider5').val(),
-            'valence': 1 - $('#slider6').val() }
+        return { 'energy': 1.0 - $('#slider1').data('slider').getValue(),
+            'danceability': 1.0 - $('#slider2').data('slider').getValue(),
+            'acousticness': 1.0 - $('#slider3').data('slider').getValue(),
+            'liveness': 1.0 - $('#slider4').data('slider').getValue(),
+            'speechiness': 1.0 - $('#slider5').data('slider').getValue(),
+            'valence': 1.0 - $('#slider6').data('slider').getValue() }
       }
       var audio = document.getElementById('radioStream')
       $.post(
@@ -122,6 +122,7 @@ block content
           audio.play();
       });
       $("#next_song").click(function() {
+        console.log(getSliderVals())
         $.post(
           'songs/pick', 
           getSliderVals(),
